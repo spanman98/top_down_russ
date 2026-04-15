@@ -1,20 +1,29 @@
 extends CharacterBody2D
 
+signal died
 
 const SPEED = 300.0
 
 var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hitbox_offset: Vector2
+var is_alive: bool = true
 var strength: int = 20
+var max_health: int
+var health: int
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var swing_sword: AudioStreamPlayer2D = $SwingSword
 @onready var hitbox: Area2D = $Hitbox
+@onready var damage_cooldown: Timer = $DamageCooldown
+
+@onready var take_damage_sound: AudioStreamPlayer2D = $TakeDamage
+@onready var swing_sword_sound: AudioStreamPlayer2D = $SwingSword
 
 
 func _ready() -> void:
-	
+	# Load health from singleton
+	max_health = PlayerStats.health
+	health = PlayerStats.health
 	# Initialize hitbox offset
 	hitbox_offset = hitbox.position
 
@@ -24,6 +33,9 @@ func _physics_process(_delta: float) -> void:
 	# Disable hitbox until an attack is triggered
 	hitbox.monitoring = false
 	
+	if not is_alive:
+		return
+		
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
 		
@@ -75,7 +87,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 func attack() -> void:
 	is_attacking = true
 	hitbox.monitoring = true
-	swing_sword.play()
+	swing_sword_sound.play()
 	play_animation("attack", last_direction)
 
 
@@ -103,3 +115,27 @@ func update_hitbox_offset() -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Slime"):
 		body.take_damage(strength, position)
+		
+		
+func take_damage(amount: int) -> void:
+	if not is_alive:
+		return
+	
+	if damage_cooldown.time_left > 0:
+		return
+		
+	take_damage_sound.play()
+	health -= amount
+	PlayerStats.health = health
+	print(health)
+	if health <= 0:
+		die()
+	# Make player invincible for a short time
+	damage_cooldown.start()
+
+
+func die() -> void:
+	animated_sprite_2d.play("dying")
+	is_alive = false
+	await animated_sprite_2d.animation_finished
+	died.emit()

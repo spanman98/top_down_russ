@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://de22gla6dx0bg" path="res://assets/images/player/Player.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://cq86yehhekvwm" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://b6scbwoyv3wgp" path="res://assets/audio/whoosh.wav" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://2kdueg5tttoi" path="res://assets/audio/player_damage.wav" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -278,7 +279,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_op7ga")
 }],
-"loop": true,
+"loop": false,
 "name": &"dying",
 "speed": 4.0
 }, {
@@ -433,8 +434,7 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1622712111]
 sprite_frames = SubResource("SpriteFrames_pfmca")
-animation = &"attack_right"
-frame = 3
+animation = &"dying"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=371441865]
 position = Vector2(0, 4)
@@ -459,6 +459,14 @@ limit_right = 2624
 limit_bottom = 1408
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="." unique_id=2061858817]
+stream = ExtResource("4_dqkch")
+pitch_scale = 1.4
+
+[node name="DamageCooldown" type="Timer" parent="." unique_id=1414001448]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="draw" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_draw"]
