@@ -12,6 +12,6 @@ script = ExtResource("1_0wfyh")
 
 [node name="HUD" parent="." unique_id=1194875599 instance=ExtResource("3_sugp2")]
 
-[node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=258075218]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1986343799]
 stream = ExtResource("4_jyhfs")
 autoplay = true
