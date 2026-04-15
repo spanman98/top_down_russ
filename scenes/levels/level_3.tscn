@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dqv27pq0jeq2u"]
 
 [ext_resource type="PackedScene" uid="uid://cthhr87mt8qrr" path="res://scenes/levels/base_level.tscn" id="1_o8c3j"]
+[ext_resource type="PackedScene" uid="uid://dk6bfdksceng1" path="res://scenes/slime.tscn" id="2_44gv1"]
 
 [node name="LevelRoot" unique_id=1959204585 instance=ExtResource("1_o8c3j")]
 
@@ -12,3 +13,9 @@ tile_map_data = PackedByteArray("AAAAAAUAAgACAAEAAAAbAAgAAAABAAIAAAAFAAcAAAAAAAE
 
 [node name="Player" parent="." index="2" unique_id=1369010160]
 position = Vector2(215, 64)
+
+[node name="Slime2" parent="Enemies" parent_id_path=PackedInt32Array(361194768) index="1" unique_id=1953962436 instance=ExtResource("2_44gv1")]
+position = Vector2(1019, 298)
+
+[node name="Slime3" parent="Enemies" parent_id_path=PackedInt32Array(361194768) index="2" unique_id=1451530865 instance=ExtResource("2_44gv1")]
+position = Vector2(1948, 1324)

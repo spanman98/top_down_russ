@@ -9,7 +9,7 @@ var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hitbox_offset: Vector2
 var is_alive: bool = true
-var strength: int = 20
+var strength: int = 40
 var max_health: int
 var health: int
 
@@ -117,6 +117,14 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	if is_attacking and body.name.begins_with("Slime"):
 		body.take_damage(strength, position)
 		
+		
+func heal(amount: int) -> void:
+	health += amount
+	if health >= max_health:
+		health = max_health
+	PlayerStats.health = health
+	emit_signal("health_changed", health)
+	
 		
 func take_damage(amount: int) -> void:
 	if not is_alive:

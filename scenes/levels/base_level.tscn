@@ -223,7 +223,7 @@ sources/2 = SubResource("TileSetAtlasSource_bd4s6")
 sources/3 = SubResource("TileSetAtlasSource_43bxi")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_53c65"]
-size = Vector2(64, 192)
+size = Vector2(66, 192)
 
 [node name="LevelRoot" type="Node2D" unique_id=1959204585]
 y_sort_enabled = true
@@ -239,7 +239,7 @@ tile_map_data = PackedByteArray("AAAAAAUAAgAAAAAAAAABAAgAAgACAAcAAAACAAYAAgAAAAg
 tile_set = SubResource("TileSet_o1chu")
 
 [node name="Player" parent="." unique_id=1369010160 instance=ExtResource("3_wwrw0")]
-position = Vector2(436, 649)
+position = Vector2(68, 652)
 
 [node name="Enemies" type="Node2D" parent="." unique_id=361194768]
 
@@ -252,3 +252,5 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" unique_id=2020040744]
 shape = SubResource("RectangleShape2D_53c65")
+
+[node name="Items" type="Node2D" parent="." unique_id=1582147910]
