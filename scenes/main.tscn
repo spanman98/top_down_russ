@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://tn7ukyrdryno"]
 
+[ext_resource type="Script" uid="uid://nl3o1b6qui7l" path="res://scripts/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cthhr87mt8qrr" path="res://scenes/levels/base_level.tscn" id="1_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=1683859750]
+script = ExtResource("1_0wfyh")
 
 [node name="LevelRoot" parent="." unique_id=1959204585 instance=ExtResource("1_sugp2")]
