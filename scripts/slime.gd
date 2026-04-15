@@ -4,7 +4,7 @@ const SPEED: float = 100.0
 const KNOCKBACK_FORCE: int = 100
 
 var is_alive: bool = true
-var strength: int = 80
+var strength: int = 10
 var health: int = 100
 var target = null
 var target_in_range: bool = false

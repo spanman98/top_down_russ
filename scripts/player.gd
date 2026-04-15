@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal health_changed(new_health: int)
 signal died
 
 const SPEED = 300.0
@@ -127,9 +128,11 @@ func take_damage(amount: int) -> void:
 	take_damage_sound.play()
 	health -= amount
 	PlayerStats.health = health
-	print(health)
+	emit_signal("health_changed", health)
+	
 	if health <= 0:
 		die()
+		
 	# Make player invincible for a short time
 	damage_cooldown.start()
 
