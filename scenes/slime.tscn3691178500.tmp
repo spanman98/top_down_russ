@@ -2,8 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://dyqjv0di1dqiy" path="res://assets/images/enemies/Slime_Green.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://0361047278jl" path="res://scripts/slime.gd" id="1_p2gj0"]
-[ext_resource type="AudioStream" uid="uid://3ccsagvtiqi4" path="res://assets/audio/hit_enemy.wav" id="3_n6pvg"]
-[ext_resource type="PackedScene" uid="uid://6ob3r24uogtw" path="res://scenes/health_bar.tscn" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p2gj0"]
 atlas = ExtResource("1_371uh")
@@ -141,7 +139,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tyl0w")
 }],
-"loop": false,
+"loop": true,
 "name": &"die",
 "speed": 8.0
 }, {
@@ -171,14 +169,14 @@ radius = 150.0
 
 [node name="Slime" type="CharacterBody2D" unique_id=1953962436]
 scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 0
 script = ExtResource("1_p2gj0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=811077738]
 sprite_frames = SubResource("SpriteFrames_24adn")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
+frame = 3
+frame_progress = 0.97429925
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=25766302]
 position = Vector2(0, 0.5)
@@ -189,12 +187,4 @@ shape = SubResource("RectangleShape2D_371uh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=2056408033]
 shape = SubResource("CircleShape2D_371uh")
 
-[node name="TakeDamage" type="AudioStreamPlayer2D" parent="." unique_id=213468495]
-stream = ExtResource("3_n6pvg")
-pitch_scale = 0.75
-
-[node name="HealthBar" parent="." unique_id=958124955 instance=ExtResource("4_pjw23")]
-position = Vector2(-9, 9)
-
 [connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
-[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
